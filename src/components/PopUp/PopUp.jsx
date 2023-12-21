@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import closeIcon from '../../assets/icons/close.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 import pencilIcon from '../../assets/icons/edit.svg';
 
-const PopUp = ({ setIsPopUpShow }) => {
+const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
+  const [taskMessage, setTaskMessage] = useState("");
+
+  const addNewTask = () => {
+    console.log(taskMessage)
+    setTasksArray([...tasksArray, taskMessage])
+    setIsPopUpShow(false);
+  }
+
   return (
+
     <div className='PopUpCom 
       absolute w-full h-full bg-[#81818150] flex justify-center items-center'>
 
@@ -40,14 +49,19 @@ const PopUp = ({ setIsPopUpShow }) => {
             <textarea 
               name="noteDescriptionTextArea" id="noteDescriptionTextArea" 
               className='p-3 resize-none outline-none shadow-lg h-20'
+              value={taskMessage} onChange={(e) => setTaskMessage(e.target.value)}
             />
           </div>
         </div>
 
         <div className="cardFooter flex justify-end">
           <button 
-            className='py-1 px-4 bg-black text-white' 
-            onClick={() => setIsPopUpShow(false)}
+            className={
+              (!taskMessage ? "cursor-not-allowed " : "") +
+              'py-1 px-4 bg-black text-white'
+            } 
+            disabled={!taskMessage}
+            onClick={addNewTask}
           >Save</button>
         </div>
 
