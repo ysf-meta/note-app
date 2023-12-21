@@ -18,7 +18,8 @@ const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
   return (
 
     <div className='PopUpCom 
-      absolute w-full h-full bg-[#81818150] flex justify-center items-center'>
+      absolute z-50 w-full h-full bg-[#81818150] flex justify-center items-center
+      '>
 
       <main className='PopUpComCard bg-white p-3 w-[700px] min-w-72'>
 
