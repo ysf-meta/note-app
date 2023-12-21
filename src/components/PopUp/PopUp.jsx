@@ -4,11 +4,14 @@ import deleteIcon from '../../assets/icons/delete.svg';
 import pencilIcon from '../../assets/icons/edit.svg';
 
 const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
-  const [taskMessage, setTaskMessage] = useState("");
+  const [taskData, setTaskData] = useState({
+    title: "",
+    description: ""
+  });
 
   const addNewTask = () => {
-    console.log(taskMessage)
-    setTasksArray([...tasksArray, taskMessage])
+    console.log(taskData)
+    setTasksArray([...tasksArray, taskData])
     setIsPopUpShow(false);
   }
 
@@ -38,7 +41,14 @@ const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
         </div>
 
         <div className="cardBody mb-5">
-          <h3 className='font-bold text-2xl mb-4'>Add Note</h3>
+          <label htmlFor='taskTitleInput' className='font-bold text-2xl mb-1'>
+            Add Note</label>
+          <input 
+            type="text" name="taskTitleInput" id="taskTitleInput" 
+            className='w-full p-3 outline-none shadow-lg border border-black'
+            value={taskData.title} 
+            onChange={(e) => setTaskData({...taskData, title: e.target.value})}
+          />
           <div className="noteDate flex items-center">
             <button className='py-2 pe-4'>Due date</button>
             <button className='py-2 px-4'>Today</button>
@@ -49,7 +59,8 @@ const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
             <textarea 
               name="noteDescriptionTextArea" id="noteDescriptionTextArea" 
               className='p-3 resize-none outline-none shadow-lg h-20'
-              value={taskMessage} onChange={(e) => setTaskMessage(e.target.value)}
+              value={taskData.description} 
+              onChange={(e) => setTaskData({...taskData, description: e.target.value})}
             />
           </div>
         </div>
@@ -57,10 +68,10 @@ const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
         <div className="cardFooter flex justify-end">
           <button 
             className={
-              (!taskMessage ? "cursor-not-allowed " : "") +
+              (!taskData.title ? "cursor-not-allowed " : "") +
               'py-1 px-4 bg-black text-white'
             } 
-            disabled={!taskMessage}
+            disabled={!taskData.title}
             onClick={addNewTask}
           >Save</button>
         </div>
