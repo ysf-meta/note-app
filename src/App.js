@@ -16,11 +16,11 @@ function App() {
   const [tasksArray, setTasksArray] = useState([]);
   const [selectedNote,setSelect]=useState();
 
-  // useEffect(()=>{
-  //   axios.get("https://udkq7e4e74.execute-api.us-east-1.amazonaws.com/v1/Note").then((response) => {
-  //     setTasksArray(response.data.Notes.Items);
-  //   });
-  // },[])
+  useEffect(()=>{
+    axios.get("https://udkq7e4e74.execute-api.us-east-1.amazonaws.com/v1/Note").then((response) => {
+      setTasksArray(response.data.Notes.Items);
+    });
+  },[])
 
   const Dash=()=>{
     return (<div className="AppCom relative flex">
