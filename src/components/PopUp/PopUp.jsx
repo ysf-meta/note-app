@@ -2,16 +2,23 @@ import React, { useState } from 'react';
 import closeIcon from '../../assets/icons/close.svg';
 import deleteIcon from '../../assets/icons/delete.svg';
 import pencilIcon from '../../assets/icons/edit.svg';
+import axios from "axios";
 
 const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
   const [taskData, setTaskData] = useState({
-    title: "",
+    Title: "",
     description: ""
   });
 
-  const addNewTask = () => {
+  const addNewTask =() => {
     setTasksArray([...tasksArray, taskData])
     setIsPopUpShow(false);
+    axios.post("https://udkq7e4e74.execute-api.us-east-1.amazonaws.com/v1/Note", 
+    {
+      "Title": taskData.Title,
+      "description": taskData.description
+    }
+    )
   }
 
   return (
@@ -46,8 +53,8 @@ const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
           <input 
             type="text" name="taskTitleInput" id="taskTitleInput" 
             className='w-full p-3 outline-none shadow-lg border border-black'
-            value={taskData.title} 
-            onChange={(e) => setTaskData({...taskData, title: e.target.value})}
+            value={taskData.Title} 
+            onChange={(e) => setTaskData({...taskData, Title: e.target.value})}
           />
           <div className="noteDate flex items-center">
             <button className='py-2 pe-4'>Due date</button>
@@ -68,10 +75,10 @@ const PopUp = ({ setIsPopUpShow, tasksArray, setTasksArray }) => {
         <div className="cardFooter flex justify-end">
           <button 
             className={
-              (!taskData.title ? "cursor-not-allowed " : "") +
+              (!taskData.Title ? "cursor-not-allowed " : "") +
               'py-1 px-4 bg-black text-white'
             } 
-            disabled={!taskData.title}
+            disabled={!taskData.Title}
             onClick={addNewTask}
           >Save</button>
         </div>

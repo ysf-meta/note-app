@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import closeIcon from '../../assets/icons/close.svg';
+import axios from 'axios';
 
 
 const UpdatePopup = ({setSelect,selectedNote,setTasksArray,tasksArray}) => {
     const [newNote,setNote]=useState({
-        title: tasksArray[selectedNote.index].title,
+        Title: tasksArray[selectedNote.index].Title,
         description: tasksArray[selectedNote.index].description
     });
     const updateNotes=()=>{
@@ -12,6 +13,13 @@ const UpdatePopup = ({setSelect,selectedNote,setTasksArray,tasksArray}) => {
             return items.map((e,i)=>(i===selectedNote.index?newNote:e))
         });
         setSelect();
+        axios.patch("https://udkq7e4e74.execute-api.us-east-1.amazonaws.com/v1/Note", 
+    {
+      "Title": tasksArray[selectedNote.index].Title,
+      "updateKey": "description",
+      "updateValue": newNote.description
+    }
+    )
     }
   return (
     <div className='absolute z-50 w-full h-full bg-[#81818150] flex justify-center items-center'>
@@ -29,7 +37,7 @@ const UpdatePopup = ({setSelect,selectedNote,setTasksArray,tasksArray}) => {
         <label className='font-semibold'>Title</label>
         
         <input type="text" className='w-full p-3 outline-none shadow-md border-gray-400 border rounded-md mb-8 mt-3' 
-        defaultValue={newNote.title} onChange={(e) => setNote({...newNote,title: e.target.value})}/>
+        defaultValue={newNote.Title} onChange={(e) => setNote({...newNote,Title: e.target.value})} disabled/>
         
 
         <div className="flex flex-col">

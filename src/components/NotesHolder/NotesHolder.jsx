@@ -25,12 +25,12 @@ const NotesHolder = ({ tasksArray,setSelect }) => {
               {
                 tasksArray.map((task, index) => (
                   <div className='task relative flex items-center gap-3 ps-10 pe-5 py-2'key={index}>
-                    <span >{task.title}</span>
+                    <span >{task.Title}</span>
                     <span className='flex-grow overflow-hidden text-xs text-center opacity-90'>
                       {task.description ? task.description : null}
                     </span>
-                    <button className="py-1 px-4 bg-black text-white me-16" onClick={()=>setSelect({action:"Edit",index:index})}>Edit</button>
-                    <button className="py-1 px-4 bg-black text-white" onClick={()=>setSelect({action:"Delete",index:index})}>Delete</button>
+                    <button className="py-1 px-4 bg-black text-white me-16" onClick={()=>setSelect({action:"Edit",index:index,title:task.Title})}>Edit</button>
+                    <button className="py-1 px-4 bg-black text-white" onClick={()=>setSelect({action:"Delete",index:index,title:task.Title})}>Delete</button>
                   </div>
                 ))
               }
