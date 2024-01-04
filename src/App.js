@@ -46,7 +46,7 @@ function App() {
       <Routes>
         <Route path='/Dashboard' element={<Dash />} />
         <Route path='/Signup' element={<Singup/>} />
-        <Route path='/Signin' element={<Singin />} />
+        <Route path='/' element={<Singin />} />
       </Routes>
     
     </Router>
